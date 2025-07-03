@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LAN YouTube Viewer</title>
+</head>
+<body>
+  <h1>Waiting for video...</h1>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script>
+    var socket = io();
+
+    socket.on('play_video', function(url) {
+      console.log('Received URL:', url);
+      // Chuyển hướng trình duyệt đến YouTube
+      window.location.href = url;
+    });
+  </script>
+</body>
+</html>

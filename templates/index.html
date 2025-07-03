@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Control Chrome on Laptop</title>
+</head>
+<body>
+  <h1>Control Chrome from Phone</h1>
+  <input type="text" id="url" placeholder="Enter YouTube URL">
+  <button onclick="play()">Play</button>
+  <button onclick="stop()">Stop</button>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script>
+    var socket = io();
+
+    function play() {
+      var url = document.getElementById('url').value;
+      socket.emit('play_video', url);
+    }
+
+    function stop() {
+      socket.emit('stop_video');
+    }
+  </script>
+</body>
+</html>
