@@ -35,7 +35,7 @@ def volume_up_func():
     subprocess.run([nircmd_path, 'changesysvolume', '6500'])
     print('Tang 10% am luong')
     # Gửi lại cho client thông báo
-    emit('status_update', f'Da tang am luong')
+    emit('status_update', f'Tang 10% am luong')
 
 @socketio.on('volume_down')
 
@@ -43,7 +43,7 @@ def volume_down_func():
     subprocess.run([nircmd_path, 'changesysvolume', '-6500'])
     print('Giam 10% am luong')
     # Gửi lại cho client thông báo
-    emit('status_update', f'Da giam am luong')
+    emit('status_update', f'Giam 10% am luong')
  
 @socketio.on('monitor_on')
 def monitorOff_func():

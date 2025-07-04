@@ -2,16 +2,78 @@
 <html>
 <head>
   <title>Control Chrome on Laptop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    #url {
+      width: 80%;
+      max-width: 400px;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    p {
+      font-size: 14px;
+      color: #555;
+    }
+    #status, #Monitor {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin: 5px 0;
+      width: 80%;
+      max-width: 400px;
+      word-wrap: break-word;
+    }
+  </style>
 </head>
 <body>
   <h1>Control Chrome from Phone</h1>
   <input type="text" id="url" placeholder="Enter YouTube URL">
-  <button onclick="play()">Play</button>
-  <button onclick="stop()">Stop</button>
-  <button onclick="up()">Volume Up</button>
-  <button onclick="down()">Volume Down</button>
-  <button onclick="monitorOn()">TurnOn Monitor</button>
-  <button onclick="monitorOff()">TurnOff Monitor</button>
+  
+  <div class="button-group">
+    <button onclick="play()">Play</button>
+    <button onclick="stop()">Stop</button>
+    <button onclick="up()">Volume Up</button>
+    <button onclick="down()">Volume Down</button>
+    <button onclick="monitorOn()">Turn On Monitor</button>
+    <button onclick="monitorOff()">Turn Off Monitor</button>
+  </div>
+
   <p id="status">Status: waiting...</p>
   <p id="Monitor">Monitor: </p>
 
@@ -39,15 +101,16 @@
     function monitorOff() {
       socket.emit('monitor_off');
     }
-    // Lắng nghe sự kiện server gửi ngược lại:
+
     socket.on('status_update', function(msg) {
       console.log('Server says:', msg);
-      document.getElementById('status').innerText = msg;
-      });
+      document.getElementById('status').innerText = "Status: " + msg;
+    });
+
     socket.on('monitor_update', function(msg) {
       console.log('Server says:', msg);
-      document.getElementById('Monitor').innerText = msg;
-      });
+      document.getElementById('Monitor').innerText = "Monitor: " + msg;
+    });
   </script>
 </body>
 </html>
