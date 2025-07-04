@@ -8,6 +8,12 @@
   <input type="text" id="url" placeholder="Enter YouTube URL">
   <button onclick="play()">Play</button>
   <button onclick="stop()">Stop</button>
+  <button onclick="up()">Volume Up</button>
+  <button onclick="down()">Volume Down</button>
+  <button onclick="monitorOn()">TurnOn Monitor</button>
+  <button onclick="monitorOff()">TurnOff Monitor</button>
+  <p id="status">Status: waiting...</p>
+  <p id="Monitor">Monitor: </p>
 
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
   <script>
@@ -21,6 +27,27 @@
     function stop() {
       socket.emit('stop_video');
     }
+    function up() {
+      socket.emit('volume_up');
+    }
+    function down() {
+      socket.emit('volume_down');
+    }
+    function monitorOn() {
+      socket.emit('monitor_on');
+    }
+    function monitorOff() {
+      socket.emit('monitor_off');
+    }
+    // Lắng nghe sự kiện server gửi ngược lại:
+    socket.on('status_update', function(msg) {
+      console.log('Server says:', msg);
+      document.getElementById('status').innerText = msg;
+      });
+    socket.on('monitor_update', function(msg) {
+      console.log('Server says:', msg);
+      document.getElementById('Monitor').innerText = msg;
+      });
   </script>
 </body>
 </html>
