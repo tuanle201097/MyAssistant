@@ -32,16 +32,16 @@ def handle_stop_video():
 
 @socketio.on('volume_up')
 def volume_up_func():
-    subprocess.run([nircmd_path, 'changesysvolume', '10000'])
-    print('Tang 15% am luong')
+    subprocess.run([nircmd_path, 'changesysvolume', '6500'])
+    print('Tang 10% am luong')
     # Gửi lại cho client thông báo
     emit('status_update', f'Da tang am luong')
 
 @socketio.on('volume_down')
 
 def volume_down_func():
-    subprocess.run([nircmd_path, 'changesysvolume', '-10000'])
-    print('Giam 15% am luong')
+    subprocess.run([nircmd_path, 'changesysvolume', '-6500'])
+    print('Giam 10% am luong')
     # Gửi lại cho client thông báo
     emit('status_update', f'Da giam am luong')
  
